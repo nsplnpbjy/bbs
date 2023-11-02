@@ -8,8 +8,8 @@ import (
 
 func LogMidware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		log.Printf(c.Request.RemoteAddr + "  访问IP")
+		log.Printf("  访问IP:" + c.Request.RemoteAddr)
 		c.Next()
-		log.Printf(c.Request.RemoteAddr + "  访问结束")
+		log.Printf("  访问结束" + c.Request.RemoteAddr)
 	}
 }

@@ -1,4 +1,4 @@
-module github.com/nsplnp/bbs
+module github.com/nsplnpbjy/bbs
 
 go 1.18
 
