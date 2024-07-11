@@ -4,12 +4,6 @@ import "github.com/gin-gonic/gin"
 
 type MethodType string
 
-const (
-	Method_GET    MethodType = "GET"
-	Method_POST   MethodType = "POST"
-	Method_DELETE MethodType = "DELETE"
-)
-
 type controllerInfo struct {
 	path       string
 	method     MethodType

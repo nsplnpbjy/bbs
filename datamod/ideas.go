@@ -1,6 +1,6 @@
 package datamod
 
-type Ideas struct {
+type Idea struct {
 	Id           string
 	Post_time    int64
 	Post_user_id string

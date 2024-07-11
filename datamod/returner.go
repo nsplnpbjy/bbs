@@ -22,12 +22,12 @@ func (u *User) UsernameAlreadyExist() *Returner {
 	return &r
 }
 
-func (i *Ideas) SuccessReturner(token string) *Returner {
+func (i *Idea) SuccessReturner(token string) *Returner {
 	r := Returner{"ok", 0, token, i}
 	return &r
 }
 
-func (i *Ideas) FailReturner() *Returner {
+func (i *Idea) FailReturner() *Returner {
 	r := Returner{"fail", 2, "", nil}
 	return &r
 }
@@ -54,5 +54,25 @@ func InvalidTokenReturner() *Returner {
 
 func TimeOutTokenReturner() *Returner {
 	r := Returner{"timeout token", 2, "", nil}
+	return &r
+}
+
+func (i *Idea) IdeaInsertedSuccess(token string) *Returner {
+	r := Returner{"idea insert success", 0, token, i}
+	return &r
+}
+
+func (i *Idea) IdeaInsertedFailed() *Returner {
+	r := Returner{"idea insert failed", 2, "", nil}
+	return &r
+}
+
+func (i *Idea) IdeaDeleteFailed() *Returner {
+	r := Returner{"idea delete failed", 2, "", nil}
+	return &r
+}
+
+func (i *Idea) IdeaDeleteSuccess(token string) *Returner {
+	r := Returner{"idea delete success", 0, token, i}
 	return &r
 }

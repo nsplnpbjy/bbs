@@ -3,15 +3,12 @@ package utils
 import (
 	"log"
 
+	"github.com/nsplnpbjy/bbs/config"
 	"golang.org/x/crypto/bcrypt"
 )
 
-const (
-	DefaultCost int = 10
-)
-
 func PasswordEncrypt(password string) string {
-	hashResult, err := bcrypt.GenerateFromPassword([]byte(password), DefaultCost)
+	hashResult, err := bcrypt.GenerateFromPassword([]byte(password), config.DefaultCost)
 	if err != nil {
 		log.Fatal("加密失败")
 		return ""

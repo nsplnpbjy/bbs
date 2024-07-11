@@ -14,7 +14,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-// 登录逻辑
+// 注册逻辑
 func RegistUser(c *gin.Context) {
 	username := string(c.PostForm("username"))
 	password := string(c.PostForm("password"))
@@ -42,7 +42,7 @@ func RegistUser(c *gin.Context) {
 	}
 }
 
-// 注册逻辑
+// 登录逻辑
 func LoginUser(c *gin.Context) {
 	username := string(c.PostForm("username"))
 	password := string(c.PostForm("password"))

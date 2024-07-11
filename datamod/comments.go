@@ -6,4 +6,5 @@ type Comments struct {
 	Upper_comments_id string
 	Post_user_id      string
 	Post_time         int64
+	Text              string
 }

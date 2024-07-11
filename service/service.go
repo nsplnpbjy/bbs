@@ -21,6 +21,8 @@ func InitEngine(path string) *gin.Engine {
 	//在这里插入controller
 	cs.ADD(config.RegistUrl, config.Method_POST, RegistUser)
 	cs.ADD(config.LoginUrl, config.Method_POST, LoginUser)
+	cs.ADD(config.PostIdeaUrl, config.Method_POST, PostIdea)
+	cs.ADD(config.DeleteIdeaUrl, config.Method_POST, DeleteIdea)
 	cs.ADD("/test", config.Method_POST, Test)
 	config.SetRouter(r, path, cs)
 	return r
