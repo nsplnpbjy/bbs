@@ -1,8 +1,9 @@
 package datamod
 
 type Comments struct {
-	id             string
-	relate_idea_id string
-	post_user_id   string
-	post_time      string
+	Id                string
+	Relate_idea_id    string
+	Upper_comments_id string
+	Post_user_id      string
+	Post_time         string
 }

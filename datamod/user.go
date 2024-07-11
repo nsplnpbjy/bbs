@@ -9,17 +9,17 @@ type User struct {
 	Comments_id []string
 }
 
-func CheckBlank(user User) bool {
-	if user.Id == "" {
+func (u *User) CheckBlank() bool {
+	if u.Id == "" {
 		return false
 	}
-	if user.Username == "" {
+	if u.Username == "" {
 		return false
 	}
-	if user.Password == "" {
+	if u.Password == "" {
 		return false
 	}
-	if user.Regist_time == "" {
+	if u.Regist_time == "" {
 		return false
 	}
 	return true
