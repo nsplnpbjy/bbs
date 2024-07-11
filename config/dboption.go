@@ -2,7 +2,6 @@ package config
 
 import (
 	"context"
-	"time"
 
 	"github.com/rs/zerolog/log"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -22,7 +21,10 @@ var (
 // 1.建立连接
 func DbInit() {
 
-	if client, err = mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://comradegenrr:bjy653300@107.172.86.242:27017").SetConnectTimeout(5*time.Second)); err != nil {
+	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
+	opts := options.Client().ApplyURI("mongodb+srv://comradegenrr:comradegenrr@atlascluster.cfu9se0.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster").SetServerAPIOptions(serverAPI)
+	client, err = mongo.Connect(context.TODO(), opts)
+	if err != nil {
 		log.Err(err).Msg("链接数据库失败")
 		panic("链接数据库失败")
 	}

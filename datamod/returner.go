@@ -1,37 +1,58 @@
 package datamod
 
-type returner struct {
+type Returner struct {
 	Msg          string
 	Service_code int
+	Token        string
 	Data         interface{}
 }
 
-func (u *User) SuccessReturner() *returner {
-	r := returner{"ok", 0, u}
+func (u *User) SuccessReturner(token string) *Returner {
+	r := Returner{"ok", 0, token, u}
 	return &r
 }
 
-func (u *User) FailReturner() *returner {
-	r := returner{"fail", 2, nil}
+func (u *User) FailReturner() *Returner {
+	r := Returner{"fail", 2, "", nil}
 	return &r
 }
 
-func (i *Ideas) SuccessReturner() *returner {
-	r := returner{"ok", 0, i}
+func (u *User) UsernameAlreadyExist() *Returner {
+	r := Returner{"username already exist", 2, "", nil}
 	return &r
 }
 
-func (i *Ideas) FailReturner() *returner {
-	r := returner{"fail", 2, nil}
+func (i *Ideas) SuccessReturner(token string) *Returner {
+	r := Returner{"ok", 0, token, i}
 	return &r
 }
 
-func (c *Comments) SuccessReturner() *returner {
-	r := returner{"ok", 0, c}
+func (i *Ideas) FailReturner() *Returner {
+	r := Returner{"fail", 2, "", nil}
 	return &r
 }
 
-func (c *Comments) FailReturner() *returner {
-	r := returner{"fail", 2, nil}
+func (c *Comments) SuccessReturner(token string) *Returner {
+	r := Returner{"ok", 0, token, c}
+	return &r
+}
+
+func (c *Comments) FailReturner() *Returner {
+	r := Returner{"fail", 2, "", nil}
+	return &r
+}
+
+func BlankTokenReturner() *Returner {
+	r := Returner{"blank token", 2, "", nil}
+	return &r
+}
+
+func InvalidTokenReturner() *Returner {
+	r := Returner{"invalid token", 2, "", nil}
+	return &r
+}
+
+func TimeOutTokenReturner() *Returner {
+	r := Returner{"timeout token", 2, "", nil}
 	return &r
 }

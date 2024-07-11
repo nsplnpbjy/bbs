@@ -6,8 +6,12 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+const (
+	DefaultCost int = 10
+)
+
 func PasswordEncrypt(password string) string {
-	hashResult, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	hashResult, err := bcrypt.GenerateFromPassword([]byte(password), DefaultCost)
 	if err != nil {
 		log.Fatal("加密失败")
 		return ""
