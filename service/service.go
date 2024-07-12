@@ -8,7 +8,6 @@ import (
 	"github.com/nsplnpbjy/bbs/config"
 	"github.com/nsplnpbjy/bbs/datamod"
 	"github.com/nsplnpbjy/bbs/midware"
-	"github.com/nsplnpbjy/bbs/utils"
 )
 
 func InitEngine(path string) *gin.Engine {
@@ -32,8 +31,7 @@ func InitEngine(path string) *gin.Engine {
 func Test(c *gin.Context) {
 	if c.PostForm("key") == "0" {
 		user := datamod.User{Id: "0000", Username: "testname", Password: "testpassword", Regist_time: time.Now().Unix(), Ideas_id: nil, Comments_id: nil}
-		token, _ := utils.GenerateToken(user.Username, user.Password)
-		c.JSON(http.StatusOK, user.DePassword().SuccessReturner(token))
+		c.JSON(http.StatusOK, user.DePassword().SuccessReturner(c.PostForm("token")))
 	} else {
 		user := datamod.User{Id: "0000", Username: "testname", Password: "testpassword", Regist_time: time.Now().Unix(), Ideas_id: nil, Comments_id: nil}
 		c.JSON(http.StatusOK, user.DePassword().FailReturner())

@@ -16,6 +16,7 @@ func JWT() gin.HandlerFunc {
 		var returnBody *datamod.Returner
 		if config.AllowPathSet.Contains(ctx.Request.URL.Path) {
 			ctx.Next()
+			return
 		} else {
 			token := ctx.PostForm("token")
 			if token == "" {
@@ -37,6 +38,7 @@ func JWT() gin.HandlerFunc {
 			ctx.Abort()
 			return
 		}
+		ctx.Request.PostForm.Set("token", utils.RefreashToken(ctx.PostForm("token")))
 		ctx.Next()
 	}
 }
