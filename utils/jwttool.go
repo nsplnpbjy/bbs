@@ -59,7 +59,6 @@ func ParseToken(token string) (*Claims, error) {
 func RefreashToken(token string) string {
 	claims, _ := ParseToken(token)
 	if (claims.ExpiresAt - time.Now().Unix()) < 300 {
-		println("in")
 		user := ParseTokenGetUserInfo(token)
 		newToken, _ := GenerateToken(user.Username, user.Password)
 		return newToken

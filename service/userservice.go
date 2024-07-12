@@ -18,6 +18,10 @@ import (
 func RegistUser(c *gin.Context) {
 	username := string(c.PostForm("username"))
 	password := string(c.PostForm("password"))
+	if username == "" || password == "" {
+		c.JSON(http.StatusOK, new(datamod.User).FailReturner())
+		return
+	}
 	encodedPassword := string(utils.PasswordEncrypt(password))
 	collection := config.GetUserCollection()
 	insertUser := datamod.User{Id: uuid.New().String(), Username: username, Password: encodedPassword, Regist_time: time.Now().Unix(), Ideas_id: nil, Comments_id: nil}

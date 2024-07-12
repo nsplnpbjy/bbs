@@ -22,6 +22,8 @@ func InitEngine(path string) *gin.Engine {
 	cs.ADD(config.LoginUrl, config.Method_POST, LoginUser)
 	cs.ADD(config.PostIdeaUrl, config.Method_POST, PostIdea)
 	cs.ADD(config.DeleteIdeaUrl, config.Method_POST, DeleteIdea)
+	cs.ADD(config.ShowNewestIdeasUrl, config.Method_POST, ShowNewestIdeas)
+	cs.ADD(config.ShowAllIdeasByUserInfoUrl, config.Method_POST, ShowAllIdeasByUserInfo)
 	cs.ADD("/test", config.Method_POST, Test)
 	config.SetRouter(r, path, cs)
 	return r

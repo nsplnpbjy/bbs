@@ -76,3 +76,15 @@ func (i *Idea) IdeaDeleteSuccess(token string) *Returner {
 	r := Returner{"idea delete success", 0, token, i}
 	return &r
 }
+
+type Ideas []Idea
+
+func (is *Ideas) IdeasSelectSuccess(token string) *Returner {
+	r := Returner{"ideas select success", 0, token, is}
+	return &r
+}
+
+func (is *Ideas) IdeasSelectFailed() *Returner {
+	r := Returner{"ideas select failed", 2, "", nil}
+	return &r
+}
