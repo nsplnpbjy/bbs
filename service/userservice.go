@@ -61,3 +61,13 @@ func LoginUser(c *gin.Context) {
 		c.JSON(http.StatusOK, resultUser.DePassword().FailReturner())
 	}
 }
+
+func GetUserInfoById(c *gin.Context) {
+	token := c.PostForm("token")
+	targetUserId := c.PostForm("targetUserId")
+	result := config.GetUserCollection().FindOne(context.TODO(), bson.D{{Key: "id", Value: targetUserId}})
+	targetUserInfo := new(datamod.User)
+	result.Decode(targetUserInfo)
+	targetUserInfo = targetUserInfo.InfoForOtherUsers()
+	c.JSON(http.StatusOK, targetUserInfo.SuccessReturner(token))
+}

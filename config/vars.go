@@ -9,6 +9,7 @@ const (
 	ApiUrl                    string = "/api"
 	RegistUrl                 string = "/regist"
 	LoginUrl                  string = "/login"
+	GetUserInfoByIdUrl        string = "/getuserinfobyid"
 	PostIdeaUrl               string = "/postidea"
 	DeleteIdeaUrl             string = "/deleteidea"
 	ShowNewestIdeasUrl        string = "/shownewestideas"

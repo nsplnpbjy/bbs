@@ -26,6 +26,7 @@ func InitEngine(path string) *gin.Engine {
 	cs.ADD(config.ShowAllIdeasByUserInfoUrl, config.Method_POST, ShowAllIdeasByUserInfo)
 	cs.ADD(config.SearchIdeaByTitleUrl, config.Method_POST, SearchIdeaByTitle)
 	cs.ADD(config.SearchIdeaByTextUrl, config.Method_POST, SearchIdeaByText)
+	cs.ADD(config.GetUserInfoByIdUrl, config.Method_POST, GetUserInfoById)
 	cs.ADD("/test", config.Method_POST, Test)
 	config.SetRouter(r, path, cs)
 	return r

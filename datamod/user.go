@@ -26,3 +26,10 @@ func (u *User) DePassword() *User {
 	u.Password = ""
 	return u
 }
+
+func (u *User) InfoForOtherUsers() *User {
+	u.Password = ""
+	u.Ideas_id = nil
+	u.Comments_id = nil
+	return u
+}
