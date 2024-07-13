@@ -5,5 +5,6 @@ type Idea struct {
 	Post_time    int64
 	Post_user_id string
 	Comments_id  []string
+	Title        string
 	Text         string
 }

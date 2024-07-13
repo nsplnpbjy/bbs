@@ -13,6 +13,8 @@ const (
 	DeleteIdeaUrl             string = "/deleteidea"
 	ShowNewestIdeasUrl        string = "/shownewestideas"
 	ShowAllIdeasByUserInfoUrl string = "/showallideasbyuserinfo"
+	SearchIdeaByTitleUrl      string = "/searchideabytitle"
+	SearchIdeaByTextUrl       string = "/searchideabytext"
 )
 
 // 允许直接通过的URL

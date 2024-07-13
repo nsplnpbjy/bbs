@@ -18,8 +18,9 @@ import (
 func PostIdea(c *gin.Context) {
 	token := c.PostForm("token")
 	user := utils.ParseTokenGetUserInfo(token)
+	title := c.PostForm("ideaTitle")
 	text := c.PostForm("ideaText")
-	idea := datamod.Idea{Id: uuid.New().String(), Post_time: time.Now().Unix(), Post_user_id: user.Id, Comments_id: nil, Text: text}
+	idea := datamod.Idea{Id: uuid.New().String(), Post_time: time.Now().Unix(), Post_user_id: user.Id, Comments_id: nil, Title: title, Text: text}
 	collecion := config.GetIdeaCollection()
 	_, error := collecion.InsertOne(context.TODO(), idea)
 	if error != nil {
@@ -96,6 +97,41 @@ func ShowAllIdeasByUserInfo(c *gin.Context) {
 	err = cursor.All(context.TODO(), ideas)
 	if err != nil {
 		c.JSON(http.StatusOK, ideas.IdeasSelectFailed())
+		return
+	}
+	c.JSON(http.StatusOK, ideas.IdeasSelectSuccess(token))
+}
+
+func SearchIdeaByTitle(c *gin.Context) {
+	token := c.PostForm("token")
+	title := c.PostForm("ideaTitle")
+	filter := bson.D{{Key: "title", Value: bson.D{{Key: "$regex", Value: title}}}}
+	results, err := config.GetIdeaCollection().Find(context.TODO(), filter)
+	if err != nil {
+		println(err.Error())
+		c.JSON(http.StatusOK, new(datamod.Ideas).IdeasSelectFailed())
+		return
+	}
+	ideas := new(datamod.Ideas)
+	if results.All(context.TODO(), ideas) != nil {
+		c.JSON(http.StatusOK, new(datamod.Ideas).IdeasSelectFailed())
+		return
+	}
+	c.JSON(http.StatusOK, ideas.IdeasSelectSuccess(token))
+}
+
+func SearchIdeaByText(c *gin.Context) {
+	token := c.PostForm("token")
+	text := c.PostForm("ideaText")
+	filter := bson.D{{Key: "text", Value: bson.D{{Key: "$regex", Value: text}}}}
+	results, err := config.GetIdeaCollection().Find(context.TODO(), filter)
+	if err != nil {
+		c.JSON(http.StatusOK, new(datamod.Ideas).IdeasSelectFailed())
+		return
+	}
+	ideas := new(datamod.Ideas)
+	if results.All(context.TODO(), ideas) != nil {
+		c.JSON(http.StatusOK, new(datamod.Ideas).IdeasSelectFailed())
 		return
 	}
 	c.JSON(http.StatusOK, ideas.IdeasSelectSuccess(token))
